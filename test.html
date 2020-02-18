@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+<link rel="stylesheet" type="text/css" href="css/barchart.css">
+</head>
+<body>
+<script src="js/d3.v3.min.js"></script>
+<script src="js/d3.tip.v0.6.3.js"></script>
+<script>
+
+var margin = {top: 40, right: 20, bottom: 30, left: 70},
+    width = 800 - margin.left - margin.right,
+    height = 600 - margin.top - margin.bottom;
+
+
+
+var data=[{"key":"2019-09-11","documentCount":149002},{"key":"2019-09-12","documentCount":0},{"key":"2019-09-13","documentCount":80000},{"key":"2019-09-14","documentCount":0},{"key":"2019-09-15","documentCount":0},{"key":"2019-09-16","documentCount":0},{"key":"2019-09-17","documentCount":0},{"key":"2019-09-18","documentCount":270204},{"key":"2019-09-19","documentCount":0},{"key":"2019-09-20","documentCount":1},{"key":"2019-09-21","documentCount":0},{"key":"2019-09-22","documentCount":0},{"key":"2019-09-23","documentCount":269836},{"key":"2019-09-24","documentCount":0},{"key":"2019-09-25","documentCount":0},{"key":"2019-09-26","documentCount":0},{"key":"2019-09-27","documentCount":0},{"key":"2019-09-28","documentCount":0},{"key":"2019-09-29","documentCount":0},{"key":"2019-09-30","documentCount":0},{"key":"2019-10-01","documentCount":0},{"key":"2019-10-02","documentCount":0},{"key":"2019-10-03","documentCount":0},{"key":"2019-10-04","documentCount":0},{"key":"2019-10-05","documentCount":0},{"key":"2019-10-06","documentCount":0},{"key":"2019-10-07","documentCount":0},{"key":"2019-10-08","documentCount":0},{"key":"2019-10-09","documentCount":0},{"key":"2019-10-10","documentCount":0},{"key":"2019-10-11","documentCount":0},{"key":"2019-10-12","documentCount":0},{"key":"2019-10-13","documentCount":0},{"key":"2019-10-14","documentCount":0},{"key":"2019-10-15","documentCount":0},{"key":"2019-10-16","documentCount":0},{"key":"2019-10-17","documentCount":0},{"key":"2019-10-18","documentCount":0},{"key":"2019-10-19","documentCount":0},{"key":"2019-10-20","documentCount":0},{"key":"2019-10-21","documentCount":0},{"key":"2019-10-22","documentCount":0},{"key":"2019-10-23","documentCount":0},{"key":"2019-10-24","documentCount":2500},{"key":"2019-10-25","documentCount":0},{"key":"2019-10-26","documentCount":0},{"key":"2019-10-27","documentCount":0},{"key":"2019-10-28","documentCount":0},{"key":"2019-10-29","documentCount":0},{"key":"2019-10-30","documentCount":0},{"key":"2019-10-31","documentCount":0},{"key":"2019-11-01","documentCount":0},{"key":"2019-11-02","documentCount":0},{"key":"2019-11-03","documentCount":0},{"key":"2019-11-04","documentCount":0},{"key":"2019-11-05","documentCount":0},{"key":"2019-11-06","documentCount":0},{"key":"2019-11-07","documentCount":0},{"key":"2019-11-08","documentCount":0},{"key":"2019-11-09","documentCount":0},{"key":"2019-11-10","documentCount":0},{"key":"2019-11-11","documentCount":0},{"key":"2019-11-12","documentCount":0},{"key":"2019-11-13","documentCount":0},{"key":"2019-11-14","documentCount":0},{"key":"2019-11-15","documentCount":0},{"key":"2019-11-16","documentCount":0},{"key":"2019-11-17","documentCount":0},{"key":"2019-11-18","documentCount":0},{"key":"2019-11-19","documentCount":0},{"key":"2019-11-20","documentCount":0},{"key":"2019-11-21","documentCount":0},{"key":"2019-11-22","documentCount":0},{"key":"2019-11-23","documentCount":0},{"key":"2019-11-24","documentCount":0},{"key":"2019-11-25","documentCount":0},{"key":"2019-11-26","documentCount":0},{"key":"2019-11-27","documentCount":0},{"key":"2019-11-28","documentCount":0},{"key":"2019-11-29","documentCount":0},{"key":"2019-11-30","documentCount":0},{"key":"2019-12-01","documentCount":0},{"key":"2019-12-02","documentCount":0},{"key":"2019-12-03","documentCount":0},{"key":"2019-12-04","documentCount":0},{"key":"2019-12-05","documentCount":0},{"key":"2019-12-06","documentCount":0},{"key":"2019-12-07","documentCount":0},{"key":"2019-12-08","documentCount":0},{"key":"2019-12-09","documentCount":0},{"key":"2019-12-10","documentCount":0},{"key":"2019-12-11","documentCount":0},{"key":"2019-12-12","documentCount":0},{"key":"2019-12-13","documentCount":0},{"key":"2019-12-14","documentCount":0},{"key":"2019-12-15","documentCount":0},{"key":"2019-12-16","documentCount":0},{"key":"2019-12-17","documentCount":0},{"key":"2019-12-18","documentCount":0},{"key":"2019-12-19","documentCount":0},{"key":"2019-12-20","documentCount":0},{"key":"2019-12-21","documentCount":0},{"key":"2019-12-22","documentCount":0},{"key":"2019-12-23","documentCount":0},{"key":"2019-12-24","documentCount":0},{"key":"2019-12-25","documentCount":0},{"key":"2019-12-26","documentCount":0},{"key":"2019-12-27","documentCount":0},{"key":"2019-12-28","documentCount":0},{"key":"2019-12-29","documentCount":0},{"key":"2019-12-30","documentCount":0},{"key":"2019-12-31","documentCount":0},{"key":"2020-01-01","documentCount":0},{"key":"2020-01-02","documentCount":0},{"key":"2020-01-03","documentCount":0},{"key":"2020-01-04","documentCount":0},{"key":"2020-01-05","documentCount":0},{"key":"2020-01-06","documentCount":0},{"key":"2020-01-07","documentCount":0},{"key":"2020-01-08","documentCount":0},{"key":"2020-01-09","documentCount":0},{"key":"2020-01-10","documentCount":0},{"key":"2020-01-11","documentCount":0},{"key":"2020-01-12","documentCount":0},{"key":"2020-01-13","documentCount":0},{"key":"2020-01-14","documentCount":0},{"key":"2020-01-15","documentCount":0},{"key":"2020-01-16","documentCount":0},{"key":"2020-01-17","documentCount":0},{"key":"2020-01-18","documentCount":0},{"key":"2020-01-19","documentCount":0},{"key":"2020-01-20","documentCount":0},{"key":"2020-01-21","documentCount":0},{"key":"2020-01-22","documentCount":0},{"key":"2020-01-23","documentCount":0},{"key":"2020-01-24","documentCount":0},{"key":"2020-01-25","documentCount":0},{"key":"2020-01-26","documentCount":0},{"key":"2020-01-27","documentCount":0},{"key":"2020-01-28","documentCount":0},{"key":"2020-01-29","documentCount":0},{"key":"2020-01-30","documentCount":0},{"key":"2020-01-31","documentCount":0},{"key":"2020-02-01","documentCount":0},{"key":"2020-02-02","documentCount":0},{"key":"2020-02-03","documentCount":0},{"key":"2020-02-04","documentCount":0},{"key":"2020-02-05","documentCount":0},{"key":"2020-02-06","documentCount":0},{"key":"2020-02-07","documentCount":0},{"key":"2020-02-08","documentCount":0},{"key":"2020-02-09","documentCount":0},{"key":"2020-02-10","documentCount":56000},{"key":"2020-02-11","documentCount":500}];
+
+var x = d3.scale.ordinal()
+    .rangeRoundBands([0, width], .1);
+
+var y = d3.scale.linear()
+    .range([height, 0]);
+
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left")
+    .ticks(10, "");
+
+var tip = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+    return "<strong>Salary:</strong> <span style='color:red'>" + d.documentCount + "</span>";
+  })
+var svg = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+svg.call(tip);
+
+
+
+x.domain(data.map(function(d) { return d.key; }));
+y.domain([0, d3.max(data, function(d) { return d.documentCount; })]);
+
+svg.append("g")
+  .attr("class", "x axis")
+  .attr("transform", "translate(0," + height + ")")
+  .call(xAxis);
+
+svg.append("g")
+  .attr("class", "y axis")
+  .call(yAxis)
+.append("text")
+  .attr("transform", "rotate(-90)")
+  .attr("y", -36)
+  .attr("dy", ".71em")
+  .style("text-anchor", "end")
+  .text("documentCount");
+
+svg.selectAll(".bar")
+  .data(data)
+.enter().append("rect")
+  .attr("class", "bar")
+  .attr("x", function(d) { return x(d.key); })
+  .attr("width", x.rangeBand())
+  .attr("y", function(d) { return y(d.documentCount); })
+  .attr("height", function(d) { return height - y(d.documentCount); })
+  .on('mouseover', tip.show)
+  .on('mouseout', tip.hide);
+
+
+function type(d) {
+  return d;
+}
+
+</script>
